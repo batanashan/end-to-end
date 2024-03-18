@@ -1,13 +1,18 @@
 [
     {
         "lbl":"UserId",
+    
         "type":"text",
-        "errorMsg":"Please Enter Uid"
+        "name":"uid",
+        "errorMsg":"",
+        "value":""
     },
     {
         "lbl":"Password",
         "type":"password",
-        "errorMsg":"Please Enter password"
+        "name":"pwd",
+        "errorMsg":"",
+        "value":""
     }
     
 ]
