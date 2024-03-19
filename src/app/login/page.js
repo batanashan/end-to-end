@@ -5,15 +5,41 @@ import configure from './configuration.json'
 const Login = () => {
   const [inputArr,setInputArr] = useState( configure)
   const [data,setData] = useState({})
+
+ 
   const fnLogin =()=>{
+    let isFormInValid = true;
  
     const clonedInputArr = JSON.parse(JSON.stringify( inputArr))
     var dataobj = {}
-    clonedInputArr.forEach((obj)=>{
- dataobj[obj.name] = obj.value
+    clonedInputArr.forEach((inputControlObject )=>{
+ dataobj[inputControlObject .name] = inputControlObject .value
+
+ switch(inputControlObject.name){
+  case 'uid':
+      if(!inputControlObject.value){
+          inputControlObject.errorMsg="please enter uid"
+        }
+        break;
+  case 'pwd':
+    if(!inputControlObject.value){
+      inputControlObject.errorMsg="please enter pwd"
+    }
+
+ }
+ isFormInValid = clonedInputArr.some((obj)=>obj.errorMsg)
+ setInputArr(clonedInputArr)
     })
-    console.log(dataobj)
+    if(isFormInValid){
+return;
+    }
+
+  alert("server connect")
   }
+
+
+
+
   const  fnChange =(eve)=>{
 
  const {name,value} = eve.target
@@ -22,7 +48,22 @@ const Login = () => {
       return obj.name === name
 
      })
+        inputControlObject.errorMsg= "";
      inputControlObject.value = value;
+
+ switch(inputControlObject.name){
+  case 'uid':
+      if(!inputControlObject.value){
+          inputControlObject.errorMsg="please enter uid"
+        }
+        break;
+  case 'pwd':
+    if(!inputControlObject.value){
+      inputControlObject.errorMsg="please enter pwd"
+    }
+
+ }
+
      setInputArr(clonedInputArr )
   
   }
